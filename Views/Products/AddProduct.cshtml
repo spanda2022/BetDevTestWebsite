@@ -1,0 +1,60 @@
+﻿@model BetDevTestClassLibrary.Model.Product
+@{
+    ViewData["Title"] = "Add Product";
+ 
+}
+
+<div class="container-fluid">
+    <div class="table-responsive">
+        
+        @using (Html.BeginForm("AddProduct", "Products", FormMethod.Post))
+        {
+        <table cellpadding="1" cellspacing="1">
+
+            <tr>
+                <td>Product Name</td>
+                <td>
+                    @Html.TextBoxFor(m => m.Name, new { title = "Provide the name,only characters are allowed" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </td>
+            </tr>
+            <tr>
+                <td>Product Image</td>
+                <td>
+                    @Html.TextBoxFor(m => m.Image, new { title = "Provide the path of the image" })
+                    @Html.ValidationMessageFor(m => m.Image)
+                </td>
+            </tr>
+            <tr>
+                <td>Quantity</td>
+                <td>
+                    @Html.TextBoxFor(m => m.Quantity, new { title = "Provide the quantity of product" })
+                    @Html.ValidationMessageFor(m => m.Quantity)
+                </td>
+            </tr>
+            <tr>
+                <td>Price(ZAR)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.Price, new { title = "Provide the price of each product" })
+                    @Html.ValidationMessageFor(m => m.Price)
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input type="submit" class="btn btn-info" value="Save" /></td>
+
+               </tr>
+
+        </table>
+        }
+
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <a asp-action="ListProducts" asp-controller="Products" class="btn btn-success">Back to ListProducts</a>
+        </div>
+
+    </div>
+</div>

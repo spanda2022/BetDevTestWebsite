@@ -1,0 +1,71 @@
+﻿
+@model BetDevTestViewModel
+@{
+    ViewData["Title"] = "Show Shopping Cart";
+
+}
+
+<div class="container-fluid">
+    <div class="table-responsive">
+
+        <table id="dtActiveCart" class="table table-striped table-hover " cellspacing="0" width="100%">
+            <tbody onload="insertText();">
+                    <tr>
+                        <td><label for="CartNo">Cart No</label></td>
+                        <td><input type="text" id="CartNo" name="CartNo" value=@Model.Cart.CardNo  readonly="readonly"/></td>
+                    </tr>
+
+                    <table id="dtCartProducts" class="table table-striped table-hover " cellspacing="0" width="100%">
+                        <thead class="">
+                            <tr>
+                                <th style="visibility:hidden" class="th-sm" scope="col">Id</th>
+                                <th class="th-sm" scope="col">Name</th>
+                                <th class="th-sm" scope="col">Image</th>
+                                <th class="th-sm" scope="col">Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody onload="insertText();">
+                            @foreach (var item in Model.CartProductsViews)
+                            {
+                                <tr>
+
+                                    <td style="visibility:hidden">@item.Id</td>
+                                    <td>@item.ProductName</td>
+                                    <td>
+                                        @if (@item.ProductImage != "")
+                                        {
+                                            <img src="@Url.Content(item.ProductImage)" alt="Sample Image" width="100" height="100" />
+                                        }
+
+                                    </td>
+                                    <td>@item.Qty</td>
+                                    @using (Html.BeginForm("RemoveProductFromCart", "ShoppingCart", new { @productId = item.ProductId, @Qty = item.Qty }))
+                                    {
+                                        <td><input class="btn btn-danger" type="submit" value="RemoveProductFromCart" /></td>
+
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+              
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <a asp-action="ListProducts" asp-controller="Products" class="btn btn-success">Back to ListProducts</a>
+        </div>
+        <div class="col-6 text-right">
+            <h3>Total Amount(ZAR)</h3>
+            <h3>Grant Total : @Model.CartProductsViews.Sum(c => (c.ProductPrice * c.Qty)).ToString("0.00") </h3>
+            @using (Html.BeginForm("CheckOut", "ShoppingCart", new { @CartId = Model.Cart.Id }))
+            {
+                <input class="btn btn-info" type="submit" value="Proceed to Checkout" />
+
+            }
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Error";
+   var errormsg = ViewBag.Errormsg;
+    
+}
+
+
+<div class="container-fluid" style="text-align:center">
+    @if (errormsg != "")
+    {
+        <h1>@errormsg</h1>
+
+        <div>
+            @if (errormsg != " No Product in the Pool ")
+            {
+                <a asp-action="ListProducts" asp-controller="Products" class="btn btn-success">Back to ListProducts</a>
+            }
+        </div>
+
+    }
+
+</div>

@@ -1,0 +1,70 @@
+﻿
+@model BetDevTestViewModel
+@{
+    ViewData["Title"] = "Show Ordered Products";
+
+    var OrderNo = ViewBag.OrderNo;
+    var OrderDate = ViewBag.OrderDate;
+    var UserEmail = ViewBag.UserEmail;
+    var TotalPrice = ViewBag.TotalPrice;
+
+}
+
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table id="dtBasicExample" class="table table-striped table-hover " cellspacing="0" width="100%">
+
+            <tr>
+                <td><label for="OrderNo">Order No</label></td>
+                <td><input type="text" id="CardNo" name="CardNo" value=@OrderNo  readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td><label for="OrderDate">Order Date</label></td>
+                <td><input type="text" id="OrderDate" name="OrderDate" value=@OrderDate  readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td><label for="UserEmail">User Email</label></td>
+                <td><input type="text" id="UserEmail" name="UserEmail" value=@UserEmail  readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td><label for="TotalPrice">Total Order Price(ZAR)</label></td>
+                <td><input type="text" id="TotalPrice" name="TotalPrice" value=@TotalPrice.ToString("0.00")  readonly="readonly"/></td>
+            </tr>
+        </table>
+        <table id="dtBasicExample" class="table table-striped table-hover " cellspacing="0" width="100%">
+            <thead class="">
+                <tr>
+                    <th style="visibility:hidden" class="th-sm" scope="col">Id</th>
+                    <th class="th-sm" scope="col">Name</th>
+                    <th class="th-sm" scope="col">Image</th>
+                    <th class="th-sm" scope="col">Quantity</th>
+                </tr>
+            </thead>
+            <tbody onload="insertText();">
+                @foreach (var item in Model.CartProductsViews)
+                {
+                    <tr>
+
+                        <td style="visibility:hidden">@item.Id</td>
+                        <td>@item.ProductName</td>
+                        <td>
+                            @if (@item.ProductImage != "")
+                            {
+                                <img src="@Url.Content(item.ProductImage)" alt="Sample Image" width="100" height="100" />
+                            }
+
+                        </td>
+                        <td>@item.Qty</td>              
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <a asp-action="ListProducts" asp-controller="Products" class="btn btn-success">Back to ListProducts</a>
+        </div>        
+    </div>
+
+
+</div>

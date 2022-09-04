@@ -1,0 +1,38 @@
+﻿
+@model BetDevTestViewModel
+@{
+    ViewData["Title"] = "Show Order History";
+
+}
+
+<div class="table-responsive">
+    <table id="dtBasicExample" class="table table-striped table-hover " cellspacing="0" width="100%">
+        <thead class="">
+            <tr>
+                <th style="visibility:hidden" class="th-sm" scope="col">CartId</th>
+                <th class="th-sm" scope="col">OrderNo</th>
+                <th class="th-sm" scope="col">OrderDate</th>
+                <th class="th-sm" scope="col">UserEmail</th>
+                <th class="th-sm" scope="col">TotalPrice(ZAR)</th>
+            </tr>
+        </thead>
+        <tbody onload="insertText();">
+            @foreach (var item in Model.OrderHistory)
+            {
+            <tr>
+                <td style="visibility:hidden">@item.CartId</td>
+                <td>@item.OrderNo</td>
+                <td>@item.OrderDate</td>
+                <td>@item.UserEmail</td>
+                <td>@item.TotalPrice.ToString("0.00")</td>
+                @using (Html.BeginForm("ShowOrderedProducts", "ShoppingCart", new { @CartId = item.CartId ,@OrderNo=item.OrderNo, @OrderDate=item.OrderDate, @UserEmail=item.UserEmail, @TotalPrice=item.TotalPrice}))
+                {
+                    <td><input type="submit" value="ShowCartProducts" class="btn btn-info" /></td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+

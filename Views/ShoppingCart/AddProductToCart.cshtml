@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "Add Product To Cart";
+    var productId = ViewBag.productId;
+    var productName = ViewBag.productName;
+}
+
+<div class="container-fluid">
+    <div class="table-responsive">
+        <form method="POST">
+            <table id="dtBasicExample" class="table table-striped table-hover " cellspacing="0" width="100%">
+
+
+                <tr style="visibility:hidden">
+                  
+                    <td><label for="productId">Product ID</label></td>
+                    <td><input type="text" id="productId"  placeholder=@productId /></td>
+                </tr>
+                <tr>
+                    <td><label for="Name">Product Name</label></td>
+                    <td><input type="text" id="Name" placeholder=@productName  readonly="readonly"/></td>
+                    
+                </tr>
+                <tr>
+                    <td><label for="Qty">Quantity</label></td>
+                    <td><input type="text" id="Qty"  name="Qty" placeholder="provide the Qty" /></td>
+                    
+                </tr>
+                <tr>
+                    <td><input type="submit" class="btn btn-success" /></td>
+                    
+                   
+                </tr>
+
+
+            </table>
+        </form>
+
+
+
+    </div>
+    
+</div>
