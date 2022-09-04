@@ -1,0 +1,26 @@
+BetDevTestProject Deployment Notes
+1. This app uses Asp.net in-built database for User registration and Login
+2. The DBScript file for other tables is called "BetDevTestDBSript.sql"
+3.Run it on the localdb where the aspnet tables are created.
+	a. It will create 4 tables named (Products,Cart,CartProducts,OrderHistory)
+4. There are 3 portion of this project
+	a. The class library called "BetDevTestClassLibrary", which contains all the business objects.
+	b. The web API called "BetDevTestAPI", which contains the database layer (entityframe work), service layer and the Web API end points for all the operations
+	c. The Front-end called "BetgDevTestWebsite" which calls the web api to do various operations
+5. After building the class library, add the reference of the dll in both Web API as well as Front-end App.
+6. The appsettings.json file in the Web API contains the smpt configuration details, the dbconfig details and the Jwt token details
+7. In the Web Api app add the below nuget packages (System.Data.SqlClient,Swashbuckle.AspNetCore,Microsoft.EntityFrameworkCore.Tools,Microsoft.EntityFrameworkCore.SqlServer,
+	Microsoft.AspNetCore.Identity.EntityFrameworkCore,Microsoft.AspNetCore.Authenication.OpenIdConnect,Microsoft.AspNetCore.Authenication.JwtBearer)
+8. The appsettings.json file in the fornt-end app containes the db config details and Web ApI url configuration as well as cntProductsToExtract in a page.
+9. In the Front-end app add the below nuget packages (Microsoft.AspNetCore.Identity.UI,Microsoft.EntityFrameworkCore.SqlServer,Microsoft.EntityFrameworkCore.Tools.Newtonsoft.Json,RestSharp,X.PageList.Mvc.Core)
+10. The images for the products are stored in the images sub-folder in wwwroot folder in the front-end app.
+
+Note: 
+1. This project uses Dependency Injection, Repository Desgin Pattern, Interface, Class, EntityFrameWork, Pagination, Web Api, and the database design.
+2. The databse design is done in this way because of time constrains of the delivery of the project. There are lots of things that can be added in the databse design.
+   I have designed the database in this way so that it can accomodate the min features required for this applicatio work function.
+3. There are lots of improvement that can be done on the web api as well as fromnt-end application, which I could not do because of time constrains.
+4. There are two more controller action in the front-end app called "Add Product" and "Delete Product". As these two actions does not come under the role of a user
+   I have not added it to any of the front-end view. But you can access the "Products/AddProduct" and "Products/DeleteProduct" url to access those actions.
+5. The sendemail while checkingout the shooping cart will only work if the required smtp configurations in the WEB API's appconfig.json is configured properly.
+6. Please make sure the Web API application is in running state, while you are testing the front-end.
